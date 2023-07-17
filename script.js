@@ -1,4 +1,5 @@
 function generateClientDatabase() {
+
     var csvContent = "id,rut,nombre,apellido,segundoApellido,fechaNacimiento,direccion,pais,ciudad,codigoPostal,telefono,correo,ocupacion,estadoCivil,centroCosto,promedioCompras\n";
     var id = 1;
 
@@ -22,16 +23,9 @@ function generateClientDatabase() {
         csvContent += id + "," + rut + "," + nombre + "," + apellido + "," + apellido2 + "," + fechaNacimiento + "," + direccion + "," + pais + "," + ciudad + "," + codigoPostal + "," + telefono + "," + correo + "," + ocupacion + "," + estadoCivil + "," + centroCosto + "," + promedioCompras + "\n";
         id++;
     }
-  
+
     return csvContent;
   }
-
-  // Función para generar el número de identificación con guión
-// function generarNumeroIdentificacion() {
-//     var parteNumerica = generarNumeroAleatorio(9000000, 25000000);
-//     var parteGuion = generarNumeroAleatorio(0,9);
-//     return parteNumerica + '-' + parteGuion;
-//   }
 
 // Función para generar un RUT con dígito verificador de 1 dígito
 function generarNumeroIdentificacion() {
@@ -179,6 +173,13 @@ function generarPromedioCompras() {
   
   // Descargar el archivo CSV
   function downloadCSV() {
+
+    Swal.fire(
+        'Base de datos generada!',
+        '',
+        'success'
+        )
+
     var fileName = "client_database.csv";
     var blob = new Blob([clientDatabase], { type: "text/csv;charset=utf-8;" });
   
