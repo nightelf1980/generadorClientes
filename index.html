@@ -3,15 +3,27 @@
 <head>
   <title>Generador de Base de Datos de Clientes</title>
   <link rel="stylesheet" href="/styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
   <div class="container">
-    <h1>Generador de Base de Datos de 5000 Clientes</h1>
-    <h2>Campos incluidos</h2>
-    <h3>ID, Rut, Nombre, Apellido, Fecha de Nacimiento, Dirección, País, Ciudad, Código Postal, Teléfono, Correo electrónico, Ocupación, Estado Civil, Centro de Costo, Compras anuales</h3>
-    <button id="downloadButton">Generar Base de Datos</button>
+        <img src="/img/database_img.png" class="img-fluid" alt="...">
+        <h1>Generador de Base de Datos</h1>
+        <div class="container-md texto">
+          
+          <p>El siguiente link generará una base de datos de 5000 clientes.</p>
+          <p>Se incluirán datos tales como: <b>ID, Rut, Nombre, Apellido, Segundo Apellido, Fecha de Nacimiento, Dirección, País, Ciudad, Código Postal, Teléfono, Correo electrónico, Ocupación, Estado Civil, Centro de Costo y Compras anuales.</b></p>
+          <p>Se descargará un archivo en formato .csv el cuál se debe abrir en block de notas, importar desde Excel o importar directamente en PowerBI.</p>
+        </div>
+    <div class="container-md">
+      <button class="btn btn-primary" id="downloadButton">Descargar Base de Datos</button>
+    </div>
   </div>
 
+  <!-- <h2>Campos incluidos</h2>
+  <h3>ID, Rut, Nombre, Apellido, Fecha de Nacimiento, Dirección, País, Ciudad, Código Postal, Teléfono, Correo electrónico, Ocupación, Estado Civil, Centro de Costo, Compras anuales</h3> -->
+
   <script src="/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>
