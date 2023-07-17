@@ -26,11 +26,44 @@ function generateClientDatabase() {
   }
 
   // Función para generar el número de identificación con guión
+// function generarNumeroIdentificacion() {
+//     var parteNumerica = generarNumeroAleatorio(9000000, 25000000);
+//     var parteGuion = generarNumeroAleatorio(0,9);
+//     return parteNumerica + '-' + parteGuion;
+//   }
+
+// Función para generar un RUT con dígito verificador de 1 dígito
 function generarNumeroIdentificacion() {
-    var parteNumerica = generarNumeroAleatorio(9000000, 25000000);
-    var parteGuion = generarNumeroAleatorio(1, 9);
-    return parteNumerica + '-' + parteGuion;
+    var rutNumerico = generarNumeroAleatorio(9000000, 25000000);
+    var digitoVerificador = generarDigitoVerificador(rutNumerico);
+    return rutNumerico + '-' + digitoVerificador;
   }
+  
+  // Función para generar el dígito verificador de un RUT
+  function generarDigitoVerificador(rutNumerico) {
+    var rutRevertido = String(rutNumerico).split("").reverse().join("");
+    var serie = [2, 3, 4, 5, 6, 7, 2, 3];
+    var suma = 0;
+  
+    for (var i = 0; i < rutRevertido.length; i++) {
+      suma += parseInt(rutRevertido.charAt(i)) * serie[i];
+    }
+  
+    var resto = suma % 11;
+    var digito;
+  
+    if (resto === 0) {
+      digito = "0";
+    } else if (resto === 1) {
+      digito = "K";
+    } else {
+      digito = String(11 - resto);
+    }
+  
+    return digito;
+  }
+
+
 
   // Función para generar un número aleatorio entre un rango dado, incluyendo los extremos
 function generarNumeroAleatorio(min, max) {
@@ -92,10 +125,15 @@ function generarTelefono() {
     return telefono;
 }
 
+// Remueve Caracteres especiales, acentos
+function removerCaracteresEspeciales(texto) {
+    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 function generarCorreo(nombre, apellido) {
     var proveedores = ["gmail.com", "hotmail.com", "yahoo.com", "outlook.com", "aol.com"];
-    var nombreCorregido = nombre.toLowerCase();
-    var apellidoCorregido = apellido.toLowerCase();
+    var nombreCorregido = removerCaracteresEspeciales(nombre.toLowerCase());
+    var apellidoCorregido = removerCaracteresEspeciales(apellido.toLowerCase());
     return nombreCorregido + "." + apellidoCorregido + "@" + proveedores[Math.floor(Math.random() * proveedores.length)];
 }
 
