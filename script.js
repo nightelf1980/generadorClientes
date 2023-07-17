@@ -1,24 +1,25 @@
 function generateClientDatabase() {
-    var csvContent = "id,rut,nombre,apellido,fechaNacimiento,direccion,pais,ciudad,codigoPostal,telefono,correo,ocupacion,estadoCivil,centroCosto,promedioCompras\n";
+    var csvContent = "id,rut,nombre,apellido,segundoApellido,fechaNacimiento,direccion,pais,ciudad,codigoPostal,telefono,correo,ocupacion,estadoCivil,centroCosto,promedioCompras\n";
     var id = 1;
 
     for (var i = 0; i < 5000; i++) {
         var rut = generarNumeroIdentificacion();
         var nombre = generarNombre();
         var apellido = generarApellido();
+        var apellido2 = generarSegundoApellido();
         var fechaNacimiento = generarFechaNacimiento();
         var direccion = generarDireccion();
         var pais = generarPais();
         var ciudad = generarCiudad(pais);
         var codigoPostal = generarCodigoPostal();
         var telefono = generarTelefono();
-        var correo = generarCorreo(nombre, apellido);
+        var correo = generarCorreo(nombre, apellido, apellido2);
         var ocupacion = generarOcupacion();
         var estadoCivil = generarEstadoCivil();
         var centroCosto = generarCentroCosto();
         var promedioCompras = generarPromedioCompras();
 
-        csvContent += id + "," + rut + "," + nombre + "," + apellido + "," + fechaNacimiento + "," + direccion + "," + pais + "," + ciudad + "," + codigoPostal + "," + telefono + "," + correo + "," + ocupacion + "," + estadoCivil + "," + centroCosto + "," + promedioCompras + "\n";
+        csvContent += id + "," + rut + "," + nombre + "," + apellido + "," + apellido2 + "," + fechaNacimiento + "," + direccion + "," + pais + "," + ciudad + "," + codigoPostal + "," + telefono + "," + correo + "," + ocupacion + "," + estadoCivil + "," + centroCosto + "," + promedioCompras + "\n";
         id++;
     }
   
@@ -76,7 +77,12 @@ function generarNumeroAleatorio(min, max) {
 }
 
 function generarApellido() {
-    var apellidos = ["Gómez", "Rodríguez", "López", "Pérez", "Martínez", "González", "Hernández", "Fernández", "Díaz", "Torres", "Pereira", "Arévalo", "Solis", "Salas"];
+    var apellido = ["Gómez", "Rodríguez", "López", "Pérez", "Martínez", "González", "Hernández", "Fernández", "Díaz", "Torres", "Pereira", "Arévalo", "Solis", "Salas", "Véliz", "Saldivia"];
+    return apellido[Math.floor(Math.random() * apellido.length)];
+}
+
+function generarSegundoApellido() {
+    var apellidos = ["Gómez", "Rodríguez", "López", "Pérez", "Martínez", "González", "Hernández", "Fernández", "Díaz", "Torres", "Pereira", "Arévalo", "Solis", "Salas", "Véliz", "Saldivia"];
     return apellidos[Math.floor(Math.random() * apellidos.length)];
 }
 
@@ -130,11 +136,12 @@ function removerCaracteresEspeciales(texto) {
     return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-function generarCorreo(nombre, apellido) {
+function generarCorreo(nombre, apellido, apellido2) {
     var proveedores = ["gmail.com", "hotmail.com", "yahoo.com", "outlook.com", "aol.com"];
-    var nombreCorregido = removerCaracteresEspeciales(nombre.toLowerCase());
+    var nombreCorregido = removerCaracteresEspeciales(nombre.toLowerCase()[0]);
     var apellidoCorregido = removerCaracteresEspeciales(apellido.toLowerCase());
-    return nombreCorregido + "." + apellidoCorregido + "@" + proveedores[Math.floor(Math.random() * proveedores.length)];
+    var segundoApellidoCorregido = removerCaracteresEspeciales(apellido2.toLowerCase()[0])
+    return nombreCorregido + apellidoCorregido + segundoApellidoCorregido + "@" + proveedores[Math.floor(Math.random() * proveedores.length)];
 }
 
 function generarOcupacion() {
